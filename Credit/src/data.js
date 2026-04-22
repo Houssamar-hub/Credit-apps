@@ -1,11 +1,11 @@
 export const creditOffers = [
-  {
-    id: 1,
-    provider: "BanqueAtlas",
-    amount: 15000,
-    rate: 3.5,
-    duration: 5,
-  },    
+    {
+        id: 1,
+        provider: "BanqueAtlas",
+        amount: 15000,
+        rate: 3.5,
+        duration: 5,
+    },    
   {
     id: 2,
     provider: "CréditSud",
