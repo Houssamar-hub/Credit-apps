@@ -1,17 +1,24 @@
 import { useState } from "react";
 import { creditOffers } from "../data.js";
-import  Cards  from "./Cards.jsx"
-import OfferModal from "./modal.jsx";
+import Cards from "./Cards";
+import ShowDetails from "./modal";
 
- function Card() {
+function Card() {
   const [selectedOffer, setSelectedOffer] = useState(null);
 
   return (
     <>
-    
-       <Cards creditOffers={creditOffers}  setSelectedOffer={setSelectedOffer}/>
-       <OfferModal selectedOffer={selectedOffer}/>
-      
+      <Cards
+        creditOffers={creditOffers}
+        setSelectedOffer={setSelectedOffer}
+      />
+
+      {selectedOffer && (
+        <ShowDetails
+          offer={selectedOffer}
+          onClose={() => setSelectedOffer(null)}
+        />
+      )}
     </>
   );
 }
