@@ -1,15 +1,39 @@
-function OfferModal({ selectedOffer, onClose }) {
-  if (!selectedOffer) return null;
+function ShowDetails({ offer, onClose }) {
+  const p = offer.amount;
+  const r = offer.rate;
+  const n = offer.duration;
+
+  const months = n * 12;
+  const monthlyRate = r / 100 / 12;
+
+  const mensualite =
+    (p * monthlyRate) /
+    (1 - Math.pow(1 + monthlyRate, -months));
+
+  const total = mensualite * months;
+  const interest = total - p;
 
   return (
     <div className="modal" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="modal-content"
+        onClick={(e) => e.stopPropagation()}
+      >
         <h2>Détails de l’offre</h2>
 
-        <p><b>Banque:</b> {selectedOffer.provider}</p>
-        <p><b>Taux:</b> {selectedOffer.rate}%</p>
-        <p><b>Montant:</b> {selectedOffer.amount}$</p>
-        <p><b>Durée:</b> {selectedOffer.duration} ans</p>
+        <p><b>Total months:</b> {months}</p>
+
+        <p>
+          <b>Mensualité:</b> {mensualite.toFixed(2)} MAD
+        </p>
+
+        <p>
+          <b>Total remboursé:</b> {total.toFixed(2)} MAD
+        </p>
+
+        <p>
+          <b>Intérêts:</b> {interest.toFixed(2)} MAD
+        </p>
 
         <button onClick={onClose}>Fermer</button>
       </div>
@@ -17,4 +41,4 @@ function OfferModal({ selectedOffer, onClose }) {
   );
 }
 
-export default OfferModal;
+export default ShowDetails;
